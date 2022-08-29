@@ -4,59 +4,47 @@
 using namespace std;
 
 class Cargo {
-protected: 
-    string name;
-    string type;
-    int quantity;
-    float total_mass;
-
 public:
-    void info(){
-        cout<<"Name: "<<name<<endl;
-        cout<<"Type: "<<type<<endl;
-        cout<<"Quantity: "<<quantity<<endl;
-        cout<<"Total mass: "<<total_mass<<endl;
-    }
-    
-Cargo(string n, string t, int q, float m){
-    name = n;
-    type = t;
-    quantity = q;
-    total_mass = m;
-}
+    vitrual void info() = 0;
+    virtual void getVolume() = 0;
+    virtual void getDensity() = 0;
+    virtual void receipt() = 0;
+    virtual void relase() = 0;
+    virtual void relase() = 0;
 };
 
 class Container : public Cargo {
-protected:
+private:
+    string name;
+    string type;
     string number;
     float length;
     float breadth;
     float height;
     float unit_mass;
+    int quantity;
 
 public:
-    void info(){
+    Container (string n, string t, string nr, float l, float b, float h, float um, int q){
+        this->name = n;
+        this->type = t;
+        this->number = nr;
+        this->length = l;
+        this->breadth = b;
+        this->height = h;
+        this->unit_mass = um;
+        this->quantity = q;
+    }
+    virutal void info(){
         cout<<"Name: "<<name<<endl;
         cout<<"Type: "<<type<<endl;
         cout<<"Number: "<<number;
         cout<<"Length: "<<length;
         cout<<"Breadth: "<<breadth;
         cout<<"Heigth: "<<height;
-        cout<<"Quantity: "<<quantity<<endl;
         cout<<"Unit mass: "<<unit_mass;
-        cout<<"Total mass: "<<total_mass<<endl;
+        cout<<"Quantity: "<<quantity<<endl;
+        cout<<"Total mass: "<<unit_mass*quantity<<endl;
 
     }
-Container(string n, string t, string nr, float l, float b, float h, float um)
-:Cargo(n, t, q){
-    name = n;
-    type = t;
-    quantity = q;
-    number = nr;
-    length = l;
-    breadth = b;
-    height = h;
-    unit_mass = um;
-    total_mass = um*quantity;
-}
 };
