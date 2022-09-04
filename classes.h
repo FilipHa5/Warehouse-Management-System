@@ -11,8 +11,8 @@ public:
     virtual void relase() = 0;*/
 };
 
-class Queue : public Cargo{
-private:
+class Queue : public Cargo {
+protected:
     std::vector<Cargo*> queue;
 public:
     void queueInfo(){
@@ -22,12 +22,11 @@ public:
         return queue.size();
     }
     virtual void queueCargo(Cargo* ptr){
-        queue.push_back(ptr);
     }
 
 };
 
-class Container : public Cargo {
+class Container : public Queue {
 private:
     std::string name;
     std::string type;
@@ -39,17 +38,13 @@ private:
     int quantity;
 
 public:
-    Container (std::string n, std::string t, std::string nr, float l, float b, float h, float um, int q){
-        this->name = n;
-        this->type = t;
-        this->number = nr;
-        this->length = l;
-        this->breadth = b;
-        this->height = h;
-        this->unit_mass = um;
-        this->quantity = q;
-    }
-    virtual void info(){
+    Container(const char* name, const char* type, const char* number, float length,
+        float breadth, float height, float unit_mass, int quantity)
+        :name(name), type(type), number(number), length(length), breadth(breadth), 
+        height(height), unit_mass(unit_mass), quantity(quantity)
+            {
+            }
+    virtual void info() override {
         std::cout<<"Name: "<<name<<std::endl;
         std::cout<<"Type: "<<type<<std::endl;
         std::cout<<"Number: "<<number<<std::endl;
@@ -60,5 +55,8 @@ public:
         std::cout<<"Quantity: "<<quantity<<std::endl;
         std::cout<<"Total mass: "<<unit_mass*quantity<<std::endl;
 
+    }
+    virtual void queueCargo(Cargo* ptr) override {
+        queue.push_back(ptr);
     }
 };
