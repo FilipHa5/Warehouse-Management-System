@@ -4,9 +4,9 @@
 
 class Cargo {
 public:
-    virtual void info() = 0;/*
-    virtual void getVolume() = 0;
-    virtual void getDensity() = 0;
+    virtual void info() = 0;
+    virtual float getVolume() = 0;
+    virtual void getDensity() = 0;/*
     virtual void receipt() = 0;
     virtual void relase() = 0;*/
 };
@@ -59,4 +59,18 @@ public:
     virtual void queueCargo(Cargo* ptr) override {
         queue.push_back(ptr);
     }
+    
+    virtual float getVolume() override {
+        float volume = length * breadth * height;
+        return volume;
+        
+    virtual float getDensity() override {
+        float volume = length * breadth * height;
+        if (volume > 0){
+            float density = unit_mass / volume;
+            return density;
+        }
+        else
+            return -1;
+        }
 };
