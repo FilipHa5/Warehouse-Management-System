@@ -6,7 +6,7 @@ class Cargo {
 public:
     virtual void info() = 0;
     virtual float getVolume() = 0;
-    virtual void getDensity() = 0;/*
+    virtual float getDensity() = 0;/*
     virtual void receipt() = 0;
     virtual void relase() = 0;*/
 };
@@ -63,6 +63,7 @@ public:
     virtual float getVolume() override {
         float volume = length * breadth * height;
         return volume;
+    }
         
     virtual float getDensity() override {
         float volume = length * breadth * height;
